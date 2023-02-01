@@ -31,6 +31,18 @@ class OneRestView(APIView):
 
         return Response({"rest_info": rest}, status=HTTP_200_OK)
 
+    def put(self, request,rest_id, format=None):
+
+        rest = Restaurants.objects.get(Q(id=rest_id))
+        property_seri = RestaurantSerializer(rest,data=request.data)
+        if property_seri.is_valid():
+            property_obj = property_seri.save()
+
+            return Response({"restaurant_id": property_seri.data}, status=HTTP_200_OK)
+        return Response({"Error": property_seri.errors}, status=HTTP_400_BAD_REQUEST)
+
+
+
 class ListRestView(APIView):
     def get(self, request, format=None):
         utili_rest = UtilityRest()

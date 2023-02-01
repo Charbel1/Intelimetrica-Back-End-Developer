@@ -3,7 +3,6 @@ from rest.models import Restaurants
 
 class UtilityRest():
 
-    
     def get_all_restaurant(self)->list:
         data_out = []
         list_rest = Restaurants.objects.filter()
