@@ -6,6 +6,7 @@ from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework.views import APIView
 
+from rest.logic_rest import UtilityRest
 from rest.models import Restaurants
 from rest.serializers.rest_serializers import RestaurantSerializer
 
@@ -29,3 +30,9 @@ class OneRestView(APIView):
                             status=HTTP_404_NOT_FOUND)
 
         return Response({"rest_info": rest}, status=HTTP_200_OK)
+
+class ListRestView(APIView):
+    def get(self, request, format=None):
+        utili_rest = UtilityRest()
+        data_out = utili_rest.get_all_restaurant()
+        return Response({"list_rest": data_out}, status=HTTP_200_OK)
