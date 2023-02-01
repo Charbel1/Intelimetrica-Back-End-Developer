@@ -22,7 +22,7 @@ class RestView(APIView):
         return Response({"Error": property_seri.errors}, status=HTTP_400_BAD_REQUEST)
 
 class OneRestView(APIView):
-    def get(self, request,rest_id, format=None):
+    def get(self,request, rest_id:int):
         try:
             rest = Restaurants.objects.get(Q(id=rest_id)).get_rest_info()
         except Restaurants.DoesNotExist:
@@ -31,20 +31,29 @@ class OneRestView(APIView):
 
         return Response({"rest_info": rest}, status=HTTP_200_OK)
 
-    def put(self, request,rest_id, format=None):
+    def put(self, request,rest_id):
 
         rest = Restaurants.objects.get(Q(id=rest_id))
         property_seri = RestaurantSerializer(rest,data=request.data)
         if property_seri.is_valid():
-            property_obj = property_seri.save()
-
+            property_seri.save()
             return Response({"restaurant_id": property_seri.data}, status=HTTP_200_OK)
+
         return Response({"Error": property_seri.errors}, status=HTTP_400_BAD_REQUEST)
 
+    def delete(self, request,rest_id:int):
+        try:
+            Restaurants.objects.get(Q(id=rest_id)).delete()
+
+        except Restaurants.DoesNotExist:
+            return Response({"Error": f"restaurant with id {rest_id}, does not exist"},
+                            status=HTTP_404_NOT_FOUND)
+
+        return Response({"success": f"restaurant with the id: {rest_id} was deleted"}, status=HTTP_200_OK)
 
 
 class ListRestView(APIView):
-    def get(self, request, format=None):
+    def get(self,request):
         utili_rest = UtilityRest()
         data_out = utili_rest.get_all_restaurant()
         return Response({"list_rest": data_out}, status=HTTP_200_OK)
