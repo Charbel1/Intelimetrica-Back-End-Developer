@@ -1,8 +1,10 @@
+from django.urls import path
 from django.urls import re_path
 
 from rest import rest_controller
 
 urlpatterns = [
 
-        re_path(r'^rest/', rest_controller.RestView.as_view()),
+        path('rest/', rest_controller.RestView.as_view()),
+        path('rest/<int:rest_id>', rest_controller.OneRestView.as_view()),
 ]
