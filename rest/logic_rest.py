@@ -19,7 +19,8 @@ class UtilityRest():
         # Restaurants.objects.extra()
         id_list =[]
         raw_query = Restaurants.objects.raw(sql_query, [longitud, latitude, range])
-        for rest in raw_query: id_list.append(rest.id)
+        for rest in raw_query:
+            id_list.append(rest.id)
         list_rest = Restaurants.objects.filter(Q(id__in = id_list))
         return list_rest
 

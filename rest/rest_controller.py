@@ -21,7 +21,7 @@ class RestView(APIView):
 
         return Response({"Error": property_seri.errors}, status=HTTP_400_BAD_REQUEST)
 
-
+   
 
 class OneRestView(APIView):
     def get(self,request, rest_id:int):
@@ -59,3 +59,14 @@ class ListRestView(APIView):
         utili_rest = UtilityRest()
         data_out = utili_rest.get_all_restaurant()
         return Response({"list_rest": data_out}, status=HTTP_200_OK)
+
+class RestStatisView(APIView):
+    def get(self,request):
+        latitude = request.GET.get('latitude', 0)
+        longitude = request.GET.get('longitude', 0)
+        radius = request.GET.get('radius', 0)
+        rest_util = UtilityRest()
+        list_rest = rest_util.get_all_restaurants_range(latitude, longitude, radius)
+        data_statis = rest_util.get_restaurants_statistics(list_rest)
+        return Response({"data_statis": data_statis}, status=HTTP_200_OK)
+
