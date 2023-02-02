@@ -77,19 +77,6 @@ WSGI_APPLICATION = 'inteli.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
-import dj_database_url
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://rest:J508D2pVlqzG3S5OVpNuyPHy7EfE9Ikl@dpg-cfe36lhmbjsrs6ag4jig-a/rest_di46',
-        conn_max_age=600
-    )
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
