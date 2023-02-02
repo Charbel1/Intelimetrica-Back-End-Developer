@@ -25,9 +25,11 @@ class UtilityRest():
         return list_rest
 
     def get_restaurants_statistics(self,list_rest:QuerySet)-> dict:
+        std = 0
         count= list_rest.count()
         avg = list_rest.aggregate(Avg('rating'))["rating__avg"]
-        std = statistics.stdev(list_rest.values_list('rating', flat=True))
+        if count > 1 :
+            std = statistics.stdev(list_rest.values_list('rating', flat=True))
         data_out ={
                 "count":count,
                 "avg" : avg,
