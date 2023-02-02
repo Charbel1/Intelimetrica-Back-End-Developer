@@ -13,8 +13,8 @@ class UtilityRest():
     def get_all_restaurants_range(self,latitude:float,longitud:float,range:float)->QuerySet:
 
         sql_query ='''select rest.id from rest_restaurants as rest 
-                    where (SQRT(power((rest.lng - %s ),2) 
-                    +power((rest.lat - %s ),2) ))*110 < %s'''
+                    where (SQRT(pow((rest.lng - %s ),2) 
+                    +pow((rest.lat - %s ),2) ))*110 < %s'''
 
         # Restaurants.objects.extra()
         id_list =[]
