@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 COPY req.txt ./
 RUN pip install -r req.txt
 COPY . .
-RUN pip python manage.py  makemigrations ; python manage.py  migrate
+RUN  python manage.py  makemigrations ; python manage.py  migrate
 EXPOSE 80
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
