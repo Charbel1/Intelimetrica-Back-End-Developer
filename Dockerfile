@@ -9,4 +9,4 @@ RUN  python manage.py  makemigrations
 RUN python manage.py  migrate
 EXPOSE 80
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
