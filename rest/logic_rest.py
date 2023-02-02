@@ -9,14 +9,38 @@ from rest.models import Restaurants
 
 
 class UtilityRest():
+    """Representa un usuario.
 
+        Attributes:
+            username (str): [Username]
+            password (str): [Password]
+        """
     def get_all_restaurants_range(self,latitude:float,longitud:float,range:float)->QuerySet:
+
+        """ function that returns all the restaurants that
+        are in the coordinates passed in
+
+        Parameters
+        ----------
+        latitude : float
+            It is the distance in degrees, minutes and
+            seconds from the main parallel, which is the equator (0º).
+        longitud : float
+            It is the distance in degrees, minutes and seconds
+             from the prime meridian, which is the Greenwich meridian (0°).
+        range : float
+            the radius of the circle
+        Returns
+        -------
+        QuerySet
+            Queryset containing all restaurants within the radius.
+        """
 
         sql_query ='''select rest.id from rest_restaurants as rest 
                     where (SQRT(pow((rest.lng - %s ),2) 
                     +pow((rest.lat - %s ),2) ))*110 < %s'''
 
-        # Restaurants.objects.extra()
+
         id_list =[]
         raw_query = Restaurants.objects.raw(sql_query, [longitud, latitude, range*1000])
         for rest in raw_query:
@@ -25,6 +49,24 @@ class UtilityRest():
         return list_rest
 
     def get_restaurants_statistics(self,list_rest:QuerySet)-> dict:
+
+        """ function returning the statistics of a restaurant
+
+
+                Parameters
+                ----------
+                list_rest : list of restaurants in queryset
+                Returns
+                -------
+                dict[count]
+                     Count of restaurants that fall inside the circle with center [x,y] and radius z,
+                dict[avg]
+                     Average rating of restaurant inside the circle,
+                dict[std]
+                    Standard deviation of rating of restaurants inside the circle
+
+                """
+
         std = 0
         count= list_rest.count()
         avg = list_rest.aggregate(Avg('rating'))["rating__avg"]
@@ -38,6 +80,17 @@ class UtilityRest():
         return data_out
 
     def get_all_restaurant(self)->list:
+        """ function returning all restaurants in the database
+
+                        Parameters
+                        ----------
+                        None
+
+                        Returns
+                        -------
+                        list
+                            list in dict format with information on each restaurant
+                        """
         data_out = []
         list_rest = Restaurants.objects.filter()
         for rest in list_rest:

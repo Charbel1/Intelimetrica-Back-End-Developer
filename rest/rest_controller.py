@@ -14,6 +14,14 @@ from rest.serializers.rest_serializers import RestaurantSerializer
 class RestView(APIView):
 
     def post(self, request):
+        """
+                       create a restaurant
+
+                        Returns
+                       -------
+                       dict
+                           with the restaurant id created
+                                                   """
         property_seri = RestaurantSerializer(data=request.data)
         if property_seri.is_valid():
             property_obj = property_seri.save()
@@ -24,7 +32,19 @@ class RestView(APIView):
    
 
 class OneRestView(APIView):
+
     def get(self,request, rest_id:int):
+        """
+                returns information about a restaurant
+                 Parameters
+                ----------
+                    rest_id : int
+                        id of a restaurant
+                 Returns
+                -------
+                dict
+                    returns a dict object with the information of the restaurant
+                """
         try:
             rest = Restaurants.objects.get(Q(id=rest_id)).get_rest_info()
         except Restaurants.DoesNotExist:
@@ -34,6 +54,17 @@ class OneRestView(APIView):
         return Response({"rest_info": rest}, status=HTTP_200_OK)
 
     def put(self, request,rest_id):
+        """
+                       modify a restaurant
+                        Parameters
+                       ----------
+                           rest_id : int
+                               id of a restaurant
+                        Returns
+                       -------
+                       dict
+                           returns a dict object with the information of the restaurant
+                       """
 
         rest = Restaurants.objects.get(Q(id=rest_id))
         property_seri = RestaurantSerializer(rest,data=request.data)
@@ -44,6 +75,17 @@ class OneRestView(APIView):
         return Response({"Error": property_seri.errors}, status=HTTP_400_BAD_REQUEST)
 
     def delete(self, request,rest_id:int):
+        """
+                               delete one restaurant
+                                Parameters
+                               ----------
+                                   rest_id : int
+                                       id of a restaurant
+                                Returns
+                               -------
+                               dict
+                                   message of success
+                               """
         try:
             Restaurants.objects.get(Q(id=rest_id)).delete()
 
@@ -56,11 +98,20 @@ class OneRestView(APIView):
 
 class ListRestView(APIView):
     def get(self,request):
+        """
+           returns all restaurants
+
+            Returns
+           -------
+           list
+               list of all restaurants
+                                       """
         utili_rest = UtilityRest()
         data_out = utili_rest.get_all_restaurant()
         return Response({"list_rest": data_out}, status=HTTP_200_OK)
 
 class RestStatisView(APIView):
+
     def get(self,request):
         latitude = request.GET.get('latitude', 0)
         longitude = request.GET.get('longitude', 0)
