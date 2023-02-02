@@ -3,7 +3,6 @@ FROM python:latest
 
 WORKDIR /usr/src/app
 COPY req.txt ./
-RUN apt install libpq-dev python3-dev
 RUN pip install -r req.txt
 COPY . .
 RUN  python manage.py  makemigrations
