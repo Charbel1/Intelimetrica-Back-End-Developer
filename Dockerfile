@@ -1,4 +1,4 @@
-FROM python:3.8.16-slim-bullseye
+FROM python:latest
 
 
 WORKDIR /usr/src/app
