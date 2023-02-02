@@ -14,7 +14,7 @@ class RestaurantSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'rating': 'the rating value has to be between 0 and 4'})
 
         return attrs
-    # Apply custom validation either here, or in the view.
+
 
     def update(self, instance, validated_data):
         instance.rating = validated_data.get('rating', instance.rating)

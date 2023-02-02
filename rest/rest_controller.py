@@ -21,6 +21,8 @@ class RestView(APIView):
 
         return Response({"Error": property_seri.errors}, status=HTTP_400_BAD_REQUEST)
 
+
+
 class OneRestView(APIView):
     def get(self,request, rest_id:int):
         try:
