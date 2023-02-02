@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.core import serializers
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_201_CREATED
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework.views import APIView
@@ -25,7 +26,7 @@ class RestView(APIView):
         property_seri = RestaurantSerializer(data=request.data)
         if property_seri.is_valid():
             property_obj = property_seri.save()
-            return Response({"restaurant_id": property_obj.id}, status=HTTP_200_OK)
+            return Response({"restaurant_id": property_obj.id}, status=HTTP_201_CREATED)
 
         return Response({"Error": property_seri.errors}, status=HTTP_400_BAD_REQUEST)
 
