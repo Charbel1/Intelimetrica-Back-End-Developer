@@ -75,26 +75,22 @@ WSGI_APPLICATION = 'inteli.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'prueba',
-#         'USER': 'root',
-#         'PASSWORD': '242538',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-#         }
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
-# }
-
+#
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': "rest_di46",
+        'USER': "rest",
+        'PASSWORD': "db_password",
+        'HOST': "dpg-cfe36lhmbjsrs6ag4jig-a",
+        'PORT': "5432",  # 5432 by default
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
