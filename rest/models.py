@@ -17,7 +17,7 @@ class Restaurants(models.Model):
 
     def get_rest_info(self):
         return {
-                "id":self.id,
+                "id_rest":self.id_rest,
                 "rating": self.rating,
                 "name"  : self.name,
                 "site"  : self.site,
