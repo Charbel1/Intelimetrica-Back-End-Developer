@@ -47,7 +47,7 @@ class OneRestView(APIView):
                     returns a dict object with the information of the restaurant
                 """
         try:
-            rest = Restaurants.objects.get(Q(id=rest_id)).get_rest_info()
+            rest = Restaurants.objects.get(Q(id_rest=rest_id)).get_rest_info()
         except Restaurants.DoesNotExist:
             return Response({"error": f"restaurant with id {rest_id}, does not exist"},
                             status=HTTP_404_NOT_FOUND)
@@ -67,7 +67,7 @@ class OneRestView(APIView):
                            returns a dict object with the information of the restaurant
                        """
 
-        rest = Restaurants.objects.get(Q(id=rest_id))
+        rest = Restaurants.objects.get(Q(id_rest=rest_id))
         property_seri = RestaurantSerializer(rest,data=request.data)
         if property_seri.is_valid():
             property_seri.save()
@@ -88,7 +88,7 @@ class OneRestView(APIView):
                                    message of success
                                """
         try:
-            Restaurants.objects.get(Q(id=rest_id)).delete()
+            Restaurants.objects.get(Q(id_rest=rest_id)).delete()
 
         except Restaurants.DoesNotExist:
             return Response({"Error": f"restaurant with id {rest_id}, does not exist"},

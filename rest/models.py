@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Restaurants(models.Model):
+    id_rest = models.CharField(max_length=100, unique=True,default=None)
     rating  = models.IntegerField()
     name = models.CharField(max_length=30)
     site = models.CharField(max_length=30)

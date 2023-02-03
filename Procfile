@@ -1,1 +1,1 @@
-web:  python manage.py migrate && gunicorn inteli.wsgi
+web: python manage.py migrate && gunicorn inteli.wsgi
