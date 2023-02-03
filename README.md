@@ -55,7 +55,7 @@ id TEXT PRIMARY KEY, -- Unique Identifier of Restaurant
 # Task 2
 - The second task consists in implementing the following endpoint:
     
-    /restaurants/statistics?latitude=x&longitude=y&radius=z
+      /restaurants/statistics?latitude=x&longitude=y&radius=z
 - It receives a latitude and a longitude as parameters, which correspond to the center of a circle,
 and a third parameter that corresponds to a radius in METERS.
 - {

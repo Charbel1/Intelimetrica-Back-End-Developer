@@ -37,12 +37,12 @@ class UtilityRest():
         """
 
         sql_query ='''select rest.id from rest_restaurants as rest 
-                    where (SQRT(power((rest.lng - %s ),2) 
-                    +power((rest.lat - %s ),2) ))*110 < %s'''
+                    where (SQRT(pow((rest.lng - %s ),2) 
+                    +pow((rest.lat - %s ),2) ))*110 < %s'''
 
 
         id_list =[]
-        raw_query = Restaurants.objects.raw(sql_query, [longitud, latitude, range*1000])
+        raw_query = Restaurants.objects.raw(sql_query, [longitud, latitude, range/1000])
         for rest in raw_query:
             id_list.append(rest.id)
         list_rest = Restaurants.objects.filter(Q(id__in = id_list))
