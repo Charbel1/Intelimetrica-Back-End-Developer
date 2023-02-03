@@ -37,8 +37,8 @@ class UtilityRest():
         """
 
         sql_query ='''select rest.id from rest_restaurants as rest 
-                    where (SQRT(pow((rest.lng - %s ),2) 
-                    +pow((rest.lat - %s ),2) ))*110 < %s'''
+                    where (SQRT(power((rest.lng - %s ),2) 
+                    +power((rest.lat - %s ),2) ))*110 < %s'''
 
 
         id_list =[]
