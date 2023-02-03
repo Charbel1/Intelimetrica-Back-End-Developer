@@ -26,7 +26,7 @@ class RestView(APIView):
         property_seri = RestaurantSerializer(data=request.data)
         if property_seri.is_valid():
             property_obj = property_seri.save()
-            return Response({"restaurant_id": property_obj.id}, status=HTTP_201_CREATED)
+            return Response({"restaurant_id": property_obj.id_rest}, status=HTTP_201_CREATED)
 
         return Response({"Error": property_seri.errors}, status=HTTP_400_BAD_REQUEST)
 
