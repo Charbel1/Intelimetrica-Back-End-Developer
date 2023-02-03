@@ -15,7 +15,7 @@ class UtilityRest():
             username (str): [Username]
             password (str): [Password]
         """
-    def get_all_restaurants_range(self,latitude:float,longitud:float,range:float)->QuerySet:
+    def get_all_restaurants_range(self,latitude:float,longitud:float,range:int)->QuerySet:
 
         """ function that returns all the restaurants that
         are in the coordinates passed in
@@ -28,7 +28,7 @@ class UtilityRest():
         longitud : float
             It is the distance in degrees, minutes and seconds
              from the prime meridian, which is the Greenwich meridian (0°).
-        range : float
+        range : int
             the radius of the circle
         Returns
         -------
@@ -39,7 +39,6 @@ class UtilityRest():
         sql_query ='''select rest.id from rest_restaurants as rest 
                     where (SQRT(power((rest.lng - %s ),2) 
                     +power((rest.lat - %s ),2) ))*110 < %s'''
-
 
         id_list =[]
         raw_query = Restaurants.objects.raw(sql_query, [longitud, latitude, range/1000])

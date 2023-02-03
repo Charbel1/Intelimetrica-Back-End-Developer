@@ -116,7 +116,10 @@ class RestStatisView(APIView):
     def get(self,request):
         latitude = request.GET.get('latitude', 0)
         longitude = request.GET.get('longitude', 0)
-        radius = request.GET.get('radius', 0)
+        try:
+            radius = int(request.GET.get('radius', 0))
+        except:
+            radius = 0
         rest_util = UtilityRest()
         list_rest = rest_util.get_all_restaurants_range(latitude, longitude, radius)
         data_statis = rest_util.get_restaurants_statistics(list_rest)
